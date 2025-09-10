@@ -243,7 +243,7 @@ class JobStatus(BaseModel):
 
 
 
-async def gen_img2img(job_id: str, face_image : Image.Image,pose_image: Image.Image,request: Img2ImgRequest):
+async def gen_img2img(job_id: str, face_image : Image.Image,request: Img2ImgRequest):
     
     seed = request.seed if request.seed else  random.randint(0, np.iinfo(np.int32).max)
     image = create_image(face_image,
