@@ -46,7 +46,7 @@ def initialize_pipelines():
     
     try:
         ip_adapter_path = hf_hub_download(repo_id="Tencent/InstantCharacter", filename="instantcharacter_ip-adapter.bin")
-        base_model = 'wikeeyang/Flux1-Dev-DedistilledMixTuned-V3'
+        base_model = 'black-forest-labs/FLUX.1-dev'
         image_encoder_path = 'google/siglip-so400m-patch14-384'
         image_encoder_2_path = 'facebook/dinov2-giant'
         birefnet_path = 'ZhengPeng7/BiRefNet'
