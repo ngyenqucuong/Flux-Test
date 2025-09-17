@@ -57,7 +57,7 @@ def initialize_pipelines():
             torch_dtype=torch.bfloat16
         )
         vae = AutoencoderKL.from_single_file(
-            "models/vae/ae.safetensors",  # Common name for FLUX VAE
+            "models/vae/ae.sft",  # Common name for FLUX VAE
             torch_dtype=torch.bfloat16
         )
         pipe = InstantCharacterFluxPipeline.from_pretrained(base_model,transformer=transformer, vae=vae, torch_dtype=torch.bfloat16)
