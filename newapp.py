@@ -51,7 +51,7 @@ def initialize_pipelines():
         image_encoder_path = 'google/siglip-so400m-patch14-384'
         image_encoder_2_path = 'facebook/dinov2-giant'
         birefnet_path = 'ZhengPeng7/BiRefNet'
-        checkpoint_path = "models/checkpoints/Nepotism-XII-checkpoint.safetensors"
+        checkpoint_path = "models/checkpoints/nepotism_xii.safetensors"
         transformer = FluxTransformer2DModel.from_single_file(
             checkpoint_path,
             torch_dtype=torch.bfloat16
