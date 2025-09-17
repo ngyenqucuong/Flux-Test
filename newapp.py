@@ -25,6 +25,7 @@ import json
 import io
 import uvicorn
 from huggingface_hub import hf_hub_download
+from diffusers import FluxTransformer2DModel,AutoencoderKL
 
 # global variable
 
@@ -50,13 +51,18 @@ def initialize_pipelines():
         image_encoder_path = 'google/siglip-so400m-patch14-384'
         image_encoder_2_path = 'facebook/dinov2-giant'
         birefnet_path = 'ZhengPeng7/BiRefNet'
-
-        pipe = InstantCharacterFluxPipeline.from_pretrained(base_model, torch_dtype=torch.bfloat16)
+        checkpoint_path = "models/checkpoints/Nepotism-XII-checkpoint.safetensors"
+        transformer = FluxTransformer2DModel.from_single_file(
+            checkpoint_path,
+            torch_dtype=torch.bfloat16
+        )
+        vae = AutoencoderKL.from_single_file(
+            "models/vae/ae.safetensors",  # Common name for FLUX VAE
+            torch_dtype=torch.bfloat16
+        )
+        pipe = InstantCharacterFluxPipeline.from_pretrained(base_model,transformer=transformer, vae=vae, torch_dtype=torch.bfloat16)
         
-        repo_name = "ByteDance/Hyper-SD"
-        ckpt_name = "Hyper-FLUX.1-dev-16steps-lora.safetensors"
-        pipe.load_lora_weights(hf_hub_download(repo_name, ckpt_name))
-        pipe.fuse_lora(lora_scale=0.125)
+        
          # load InstantCharacter
         pipe.init_adapter(
             image_encoder_path=image_encoder_path, 

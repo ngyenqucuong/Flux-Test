@@ -11,6 +11,8 @@ from torchvision import transforms
 from pipeline import InstantCharacterFluxPipeline
 
 # global variable
+torch.cuda.empty_cache()
+
 MAX_SEED = np.iinfo(np.int32).max
 device = "cuda" if torch.cuda.is_available() else "cpu"
 dtype = torch.float16 if str(device).__contains__("cuda") else torch.float32

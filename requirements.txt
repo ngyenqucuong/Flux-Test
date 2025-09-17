@@ -13,3 +13,4 @@ timm
 protobuf
 sentencepiece
 kornia
+huggingface_hub[cli]
